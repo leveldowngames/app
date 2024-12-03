@@ -15,7 +15,8 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
-
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         // Check and request permissions
-        if (!hasLocationPermission()) {
+        while (!hasLocationPermission()) {
             requestLocationPermission()
         }
 
