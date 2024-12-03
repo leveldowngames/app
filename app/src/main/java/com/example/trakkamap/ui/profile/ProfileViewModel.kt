@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class ProfileViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Profile tab"
+        value = "This is the Profile tab"
     }
     val text: LiveData<String> = _text
 }

@@ -31,5 +31,9 @@
             android:name="org.osmdroid.config"
             android:value="osmdroid" />
 
+        <service
+            android:name="Pinpointer"
+            android:foregroundServiceType="location"/>
+
     </application>
 </manifest>
