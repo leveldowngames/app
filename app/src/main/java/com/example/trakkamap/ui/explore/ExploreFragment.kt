@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.trakkamap.R
 import org.osmdroid.config.Configuration
+import org.osmdroid.util.BoundingBox
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 
@@ -53,6 +54,10 @@ class ExploreFragment : Fragment() {
         colorMatrix.preConcat(inverseMatrix);
         val filter = ColorMatrixColorFilter(colorMatrix)
         mapView.overlayManager.tilesOverlay.setColorFilter(filter)
+        mapView.minZoomLevel = 4.0
+        mapView.isVerticalMapRepetitionEnabled = false
+        mapView.setScrollableAreaLimitLatitude(85.0, -85.0, 1)
+
 
         // Set the default zoom and center
         val mapController = mapView.controller
