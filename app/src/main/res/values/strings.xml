@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Trakka Map</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_achievements">Achievements</string>
+    <string name="title_profile">Profile</string>
+</resources>
