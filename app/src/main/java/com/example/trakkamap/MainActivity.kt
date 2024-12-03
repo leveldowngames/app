@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             requestLocationPermission()
         }
 
-        startService(Intent(this, Pinpointer::class.java))
+        // startService(Intent(this, Pinpointer::class.java))
 
     }
 
