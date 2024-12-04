@@ -14,6 +14,7 @@ import com.example.trakkamap.databinding.ActivityMainBinding
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -28,7 +29,13 @@ class MainActivity : AppCompatActivity() {
 
             if (!(fineLocationGranted || coarseLocationGranted)) {
                 Toast.makeText(this, "Location permissions are needed for Trakka Map to work properly.", Toast.LENGTH_SHORT).show()
-                // Proceed with location-related tasks
+            }
+        }
+
+    private val requestNotificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { permission ->
+            if (!permission) {
+                Toast.makeText(this, "Notification permissions are recommended for Trakka Map to work properly.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -54,11 +61,15 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         // Check and request permissions
-        while (!hasLocationPermission()) {
+        if (!hasLocationPermission()) {
             requestLocationPermission()
         }
 
-        // startService(Intent(this, Pinpointer::class.java))
+//        if (!hasNotificationPermission()) {
+//            requestNotificationPermission()
+//        }
+
+        //startService(Intent(this, Pinpointer::class.java))
 
     }
 
@@ -85,5 +96,28 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
+    }
+
+    // Check if location permissions are granted
+    private fun hasNotificationPermission(): Boolean {
+        val notificationGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            return true
+        }
+
+        return notificationGranted
+    }
+
+    // Request location permissions
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestNotificationPermissionLauncher.launch(
+                Manifest.permission.POST_NOTIFICATIONS
+            )
+        }
     }
 }

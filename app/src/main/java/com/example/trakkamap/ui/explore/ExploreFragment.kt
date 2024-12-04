@@ -4,28 +4,32 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
-import android.icu.number.Scale
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import com.example.trakkamap.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import org.osmdroid.config.Configuration
+import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.compass.CompassOverlay
-import org.osmdroid.views.overlay.ScaleBarOverlay
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
+import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
 class ExploreFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var mapView: MapView
+    private lateinit var buttonCenterMap : ImageButton
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(
@@ -60,7 +64,7 @@ class ExploreFragment : Fragment() {
                 0.00f, 0.00f, 0.00f, 1.00f, 0.0f,
             )
         )
-        colorMatrix.preConcat(inverseMatrix);
+        colorMatrix.preConcat(inverseMatrix)
         val filter = ColorMatrixColorFilter(colorMatrix)
         mapView.overlayManager.tilesOverlay.setColorFilter(filter)
 
@@ -73,30 +77,67 @@ class ExploreFragment : Fragment() {
         val mapController = mapView.controller
         mapController.setZoom(15.0)
 
-        val marker = Marker(mapView)
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        marker.title = "Your location"
-        marker.icon = ContextCompat.getDrawable(requireContext(), R.drawable.twotone_arrow_circle_down_24)
+        val locationOverlay =
+            object : MyLocationNewOverlay(GpsMyLocationProvider(requireContext()), mapView) {
+                override fun onLocationChanged(location: Location?, source: IMyLocationProvider?) {
+                    super.onLocationChanged(location, source)
+                }
+            }
+
+        locationOverlay.enableFollowLocation()
+        val icon = ContextCompat.getDrawable(requireContext(), R.drawable.twotone_arrow_circle_down_24)?.toBitmap()
+
+        locationOverlay.setDirectionIcon(icon)
+        locationOverlay.setPersonIcon(icon)
+
+        locationOverlay.enableMyLocation()
+        locationOverlay.isDrawAccuracyEnabled = false
+        locationOverlay.setPersonAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+        locationOverlay.setDirectionAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+
+        mapView.overlays.add(locationOverlay)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
+
                 if (location != null) {
                     val latitude = location.latitude
-
                     val longitude = location.longitude
 
-                    mapController.setCenter(org.osmdroid.util.GeoPoint(latitude, longitude))
-                    marker.position = org.osmdroid.util.GeoPoint(latitude, longitude)
+                    mapController.setCenter(GeoPoint(latitude, longitude))
                 }
 
-            }
 
-        // Add a marker
-        mapView.overlays.add(marker)
+            }.addOnFailureListener {
+                mapController.setCenter(GeoPoint(0.0, 0.0))
+                mapController.setZoom(4.0)
+                Toast.makeText(requireContext(), "Failed to fetch your location. Check permissions and retry.", Toast.LENGTH_SHORT).show()
+            }
 
         return rootView
     }
+
+    @SuppressLint("MissingPermission")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        buttonCenterMap = requireView().findViewById(R.id.ic_center_map)
+        buttonCenterMap.setOnClickListener {
+            var myPosition : Location? = null
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    myPosition = location
+                    if(myPosition != null)
+                    {
+                        val point = GeoPoint(myPosition!!.latitude, myPosition!!.longitude)
+                        mapView.controller.animateTo(point, 15.0, 1000)
+
+                    }
+                }
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
