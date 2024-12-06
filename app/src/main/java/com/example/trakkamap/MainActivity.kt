@@ -28,14 +28,18 @@ class MainActivity : AppCompatActivity() {
             val coarseLocationGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
 
             if (!(fineLocationGranted || coarseLocationGranted)) {
-                Toast.makeText(this, "Location permissions are needed for Trakka Map to work properly.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Location permissions are needed for the app to work properly.", Toast.LENGTH_SHORT).show()
+            }
+
+            if (!hasNotificationPermission()) {
+                requestNotificationPermission()
             }
         }
 
     private val requestNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { permission ->
             if (!permission) {
-                Toast.makeText(this, "Notification permissions are recommended for Trakka Map to work properly.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Notification permissions are recommended the app to work properly.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -64,10 +68,6 @@ class MainActivity : AppCompatActivity() {
         if (!hasLocationPermission()) {
             requestLocationPermission()
         }
-
-//        if (!hasNotificationPermission()) {
-//            requestNotificationPermission()
-//        }
 
         //startService(Intent(this, Pinpointer::class.java))
 

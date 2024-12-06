@@ -112,7 +112,6 @@ class ExploreFragment : Fragment() {
             }.addOnFailureListener {
                 mapController.setCenter(GeoPoint(0.0, 0.0))
                 mapController.setZoom(4.0)
-                Toast.makeText(requireContext(), "Failed to fetch your location. Check permissions and retry.", Toast.LENGTH_SHORT).show()
             }
 
         return rootView
