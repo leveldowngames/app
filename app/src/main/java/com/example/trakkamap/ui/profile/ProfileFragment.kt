@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import androidx.core.view.allViews
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.trakkamap.R
 import com.example.trakkamap.databinding.FragmentProfileBinding
-import com.example.trakkamap.ui.achievements.HelpFragment
-
+import com.example.trakkamap.ui.help.HelpFragment
+import com.example.trakkamap.ui.settings.SettingsFragment
+import com.example.trakkamap.ui.privacy.PrivacyFragment
 
 class ProfileFragment : Fragment() {
 
@@ -44,6 +43,20 @@ class ProfileFragment : Fragment() {
         helpButton.setOnClickListener {
             childFragmentManager.beginTransaction()
                 .replace(R.id.innerFragmentContainer, HelpFragment())
+                .commit()
+        }
+
+        val settingsButton = requireView().findViewById<ImageButton>(R.id.settings_button)
+        settingsButton.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.innerFragmentContainer, SettingsFragment())
+                .commit()
+        }
+
+        val privacyButton = requireView().findViewById<ImageButton>(R.id.privacy_button)
+        privacyButton.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.innerFragmentContainer, PrivacyFragment())
                 .commit()
         }
     }

@@ -1,4 +1,4 @@
-package com.example.trakkamap.ui.help
+package com.example.trakkamap.ui.privacy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.trakkamap.R
-import com.example.trakkamap.databinding.HelpSectionBinding
+import com.example.trakkamap.databinding.PrivacySectionBinding
 
-class HelpFragment : Fragment() {
+class PrivacyFragment : Fragment() {
 
-    private var _binding: HelpSectionBinding? = null
+    private var _binding: PrivacySectionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,7 +23,7 @@ class HelpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = HelpSectionBinding.inflate(inflater, container, false)
+        _binding = PrivacySectionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root
