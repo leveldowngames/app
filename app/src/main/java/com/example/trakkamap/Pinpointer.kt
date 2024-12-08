@@ -1,13 +1,13 @@
 package com.example.trakkamap
 
 import android.annotation.SuppressLint
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.location.Location
 import android.os.Build
 import android.os.Handler
@@ -16,11 +16,14 @@ import android.os.IBinder
 import android.os.Looper
 import android.os.Message
 import android.os.Process
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import java.io.File
+import kotlin.math.exp
+import kotlin.math.floor
 
 
 class Pinpointer : Service()
@@ -38,10 +41,19 @@ class Pinpointer : Service()
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             val file = File(this@Pinpointer.filesDir, "records.txt")
+            if(!file.exists())
+            {
+                file.appendText("")
+            }
 
             try {
                 while(true)
                 {
+                    val recordFileString = file.readText()
+                    val exploredGeotags = recordFileString.split("\n")
+
+                    Log.i("extracted from file", exploredGeotags.toString())
+
                     var currentLocation : Location? = null
 
                     Thread.sleep(10000)
@@ -49,8 +61,12 @@ class Pinpointer : Service()
                     fusedLocationClient = LocationServices.getFusedLocationProviderClient(this@Pinpointer)
                     fusedLocationClient.lastLocation
                         .addOnSuccessListener { location : Location? ->
-                            currentLocation = location
-                            //file.appendText(location!!.latitude.toString() + location.longitude.toString())
+                            val squareID = calculateSquareID(location!!)
+                            if(exploredGeotags.indexOf(squareID) != -1)
+                            {
+                                file.appendText(squareID + "\n")
+                                Log.i("pinpointer", "appended geotags file")
+                            }
                         }
 
                 }
@@ -70,8 +86,9 @@ class Pinpointer : Service()
         // create the notification
         val builder = NotificationCompat.Builder(this, "channel_id")
             .setSmallIcon(R.drawable.baseline_location_on_24)
-            .setContentTitle("Trakka")
-            .setContentText("You have a new message.")
+            .setColor((Color.parseColor("#6a3de8")))
+            .setContentTitle("Pinpointing service")
+            .setContentText("Trakka Map is using your location to track your exploration")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         // create the pending intent and add to the notification
@@ -131,5 +148,14 @@ class Pinpointer : Service()
 
     override fun onDestroy() {
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun calculateSquareID(loc : Location) : String {
+        val latitude = loc.latitude
+        val longitude = loc.longitude
+
+        val id = (floor((longitude+180)/0.009) + 40000 * floor((latitude+90)/0.009)).toInt().toString()
+
+        return id
     }
 }

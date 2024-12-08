@@ -3,4 +3,10 @@
     <string name="title_explore">Explore</string>
     <string name="title_achievements">Achievements</string>
     <string name="title_profile">Profile</string>
+    <string name="button1_text">Help</string>
+    <string name="button2_text">Settings</string>
+    <string name="button3_text">Privacy</string>
+    <string name="hi_user">Hi, User</string>
+    <string name="help">Help</string>
+    <string name="help_infotext">This is a sample text for the help menu. Someone needs to actually write me later...</string>
 </resources>

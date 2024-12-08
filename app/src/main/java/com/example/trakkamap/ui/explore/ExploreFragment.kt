@@ -2,6 +2,7 @@ package com.example.trakkamap.ui.explore
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.location.Location
@@ -17,10 +18,13 @@ import androidx.fragment.app.Fragment
 import com.example.trakkamap.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.animation.AnimatableView.Listener
 import org.osmdroid.config.Configuration
+import org.osmdroid.events.MapListener
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Polygon
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
@@ -75,7 +79,7 @@ class ExploreFragment : Fragment() {
 
         // Set the default zoom and center
         val mapController = mapView.controller
-        mapController.setZoom(15.0)
+        mapController.setZoom(16.0)
 
         val locationOverlay =
             object : MyLocationNewOverlay(GpsMyLocationProvider(requireContext()), mapView) {
@@ -113,6 +117,14 @@ class ExploreFragment : Fragment() {
                 mapController.setCenter(GeoPoint(0.0, 0.0))
                 mapController.setZoom(4.0)
             }
+
+        // adds event listener for scroll and zoom with callback
+        // to the functions defined in class ChangeMaker
+        val listener = ChangeMaker(mapView, requireContext())
+        mapView.addMapListener(listener)
+
+        ChangeMaker.drawGrid(mapView, requireContext())
+
 
         return rootView
     }

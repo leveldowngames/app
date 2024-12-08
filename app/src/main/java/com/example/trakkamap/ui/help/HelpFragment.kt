@@ -1,37 +1,32 @@
-package com.example.trakkamap.ui.profile
+package com.example.trakkamap.ui.achievements
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import androidx.core.view.allViews
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.trakkamap.R
-import com.example.trakkamap.databinding.FragmentProfileBinding
-import com.example.trakkamap.ui.achievements.HelpFragment
+import com.example.trakkamap.databinding.HelpSectionBinding
+import com.example.trakkamap.ui.profile.ProfileFragment
 
+class HelpFragment : Fragment() {
 
-class ProfileFragment : Fragment() {
-
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: HelpSectionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private var helpButton: ImageButton? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = HelpSectionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root
@@ -40,10 +35,10 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val helpButton = requireView().findViewById<ImageButton>(R.id.help_button)
-        helpButton.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.innerFragmentContainer, HelpFragment())
+        val backButton = requireView().findViewById<ImageButton>(R.id.back_button)
+        backButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .remove(this)
                 .commit()
         }
     }

@@ -6,17 +6,118 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <TextView
-        android:id="@+id/text_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+
+    <ImageView
+        android:id="@+id/centralIcon"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="24dp"
+        android:paddingBottom="40dp"
+        android:src="@drawable/baseline_person_80"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/centralIcon"
+        app:layout_constraintEnd_toEndOf="@id/centralIcon"
+        app:layout_constraintStart_toStartOf="@id/centralIcon"
+        android:text="@string/hi_user"
+        android:textColor="@color/light_purple"
+        android:textSize="35sp"
+        android:textStyle="bold"/>
+
+
+    <ImageButton
+        android:id="@+id/help_button"
+        android:layout_width="86dp"
+        android:layout_height="84dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/round_corner"
+        android:paddingBottom="20dp"
+        android:src="@drawable/baseline_info_48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/centralIcon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/button1_text"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/help_button"
+        app:layout_constraintEnd_toEndOf="@id/help_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/help_button" />
+
+
+    <ImageButton
+        android:id="@+id/settings_button"
+        android:layout_width="86dp"
+        android:layout_height="84dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/round_corner"
+        android:src="@drawable/baseline_settings_48"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/centralIcon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/button2_text"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/settings_button"
+        app:layout_constraintEnd_toEndOf="@id/settings_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/settings_button" />
+
+    <ImageButton
+        android:id="@+id/privacy_button"
+        android:layout_width="86dp"
+        android:layout_height="84dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/round_corner"
+        android:src="@drawable/baseline_assignment_48"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/centralIcon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/button3_text"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/privacy_button"
+        app:layout_constraintEnd_toEndOf="@id/privacy_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/privacy_button" />
+
+
+    <FrameLayout
+        android:id="@+id/innerFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

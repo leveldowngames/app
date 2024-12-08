@@ -22,4 +22,11 @@
         android:name="com.example.trakkamap.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/help_section"
+        android:name="com.example.trakkamap.ui.help.HelpFragment"
+        android:label="Help"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>
