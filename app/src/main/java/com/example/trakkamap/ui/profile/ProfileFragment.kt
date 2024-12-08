@@ -42,6 +42,10 @@ class ProfileFragment : Fragment() {
         val helpButton = requireView().findViewById<ImageButton>(R.id.help_button)
         helpButton.setOnClickListener {
             childFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
                 .replace(R.id.innerFragmentContainer, HelpFragment())
                 .commit()
         }
@@ -49,6 +53,10 @@ class ProfileFragment : Fragment() {
         val settingsButton = requireView().findViewById<ImageButton>(R.id.settings_button)
         settingsButton.setOnClickListener {
             childFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
                 .replace(R.id.innerFragmentContainer, SettingsFragment())
                 .commit()
         }
@@ -56,6 +64,10 @@ class ProfileFragment : Fragment() {
         val privacyButton = requireView().findViewById<ImageButton>(R.id.privacy_button)
         privacyButton.setOnClickListener {
             childFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
                 .replace(R.id.innerFragmentContainer, PrivacyFragment())
                 .commit()
         }

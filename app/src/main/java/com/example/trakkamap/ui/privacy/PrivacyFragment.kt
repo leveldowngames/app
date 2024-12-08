@@ -35,6 +35,10 @@ class PrivacyFragment : Fragment() {
         val backButton = requireView().findViewById<ImageButton>(R.id.back_button)
         backButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
                 .remove(this)
                 .commit()
         }
