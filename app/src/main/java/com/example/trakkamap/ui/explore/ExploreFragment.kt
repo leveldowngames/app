@@ -7,6 +7,9 @@ import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +37,8 @@ class ExploreFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var mapView: MapView
     private lateinit var buttonCenterMap : ImageButton
+    private lateinit var context: Context
+    private lateinit var listener : ChangeMaker
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(
@@ -45,6 +50,9 @@ class ExploreFragment : Fragment() {
 
         // Inflate the layout
         val rootView = inflater.inflate(R.layout.fragment_explore, container, false)
+
+        // Initialize the context
+        context = requireContext()
 
         // Initialize the MapView
         mapView = rootView.findViewById(R.id.mapView)
@@ -118,13 +126,8 @@ class ExploreFragment : Fragment() {
                 mapController.setZoom(4.0)
             }
 
-        // adds event listener for scroll and zoom with callback
-        // to the functions defined in class ChangeMaker
-        val listener = ChangeMaker(mapView, requireContext())
+        listener = ChangeMaker(mapView, requireContext())
         mapView.addMapListener(listener)
-
-        ChangeMaker.drawGrid(mapView, requireContext())
-
 
         return rootView
     }
@@ -143,7 +146,6 @@ class ExploreFragment : Fragment() {
                     {
                         val point = GeoPoint(myPosition!!.latitude, myPosition!!.longitude)
                         mapView.controller.animateTo(point, 15.0, 1000)
-
                     }
                 }
         }

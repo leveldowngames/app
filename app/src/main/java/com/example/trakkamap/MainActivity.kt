@@ -1,6 +1,7 @@
 package com.example.trakkamap
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             requestLocationPermission()
         }
 
-        // startService(Intent(this, Pinpointer::class.java))
+        startService(Intent(this, Pinpointer::class.java))
 
     }
 
@@ -119,8 +120,4 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-
-
-    fun openSubmenuSettings(view: View) {}
-    fun openSubmenuPrivacy(view: View) {}
 }

@@ -54,20 +54,18 @@ class Pinpointer : Service()
 
                     Log.i("extracted from file", exploredGeotags.toString())
 
-                    var currentLocation : Location? = null
-
-                    Thread.sleep(10000)
-
                     fusedLocationClient = LocationServices.getFusedLocationProviderClient(this@Pinpointer)
                     fusedLocationClient.lastLocation
                         .addOnSuccessListener { location : Location? ->
-                            val squareID = calculateSquareID(location!!)
-                            if(exploredGeotags.indexOf(squareID) != -1)
+                            val squareID = calculatePrintableID(location!!)
+                            if(exploredGeotags.indexOf(squareID) == -1)
                             {
                                 file.appendText(squareID + "\n")
                                 Log.i("pinpointer", "appended geotags file")
                             }
                         }
+
+                    Thread.sleep(10000)
 
                 }
 
@@ -150,12 +148,16 @@ class Pinpointer : Service()
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show()
     }
 
-    private fun calculateSquareID(loc : Location) : String {
+    private fun calculateSquareID(loc : Location) : Pair<Int, Int> {
         val latitude = loc.latitude
         val longitude = loc.longitude
 
-        val id = (floor((longitude+180)/0.009) + 40000 * floor((latitude+90)/0.009)).toInt().toString()
+        val coordinates : Pair<Int, Int> = Pair(floor((longitude+180)/0.009).toInt(), floor((latitude+90)/0.009).toInt())
 
-        return id
+        return coordinates
+    }
+
+    private fun calculatePrintableID(loc: Location) : String{
+        return calculateSquareID(loc).toString()
     }
 }
