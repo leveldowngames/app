@@ -4,26 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.achievements.AchievementsFragment">
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/text_achievements"
-        android:layout_width="match_parent"
+    <!-- First MaterialCardView (Horizontal Rectangle) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTop"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:strokeColor="#E0E0E0"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <FrameLayout
-        android:id="@+id/percent_explored_achievements"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        tools:ignore="MissingConstraints" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00%"
+                android:textColor="@color/light_purple"
+                android:textStyle="bold"
+                android:textSize="56sp"
+                android:textAppearance="?android:textAppearanceMedium"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="of Earth\ndiscovered"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textSize="18sp"
+                android:paddingBottom="10dp"
+                android:paddingStart="10dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/percentage"
+                app:layout_constraintStart_toEndOf="@id/percentage"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Second MaterialCardView (Square-like) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBottom"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:strokeColor="#E0E0E0"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/cardTop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="14sp"
+            android:text="Here, you'll see your achievements."
+            android:textAppearance="?android:textAppearanceMedium" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

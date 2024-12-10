@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.example.trakkamap.R
 import com.example.trakkamap.databinding.FragmentAchievementsBinding
+import java.io.File
+import java.util.Locale
 
 class AchievementsFragment : Fragment() {
 
@@ -22,21 +24,32 @@ class AchievementsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val achievementsViewModel =
-            ViewModelProvider(this).get(AchievementsViewModel::class.java)
 
         _binding = FragmentAchievementsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textAchievements
-        achievementsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        // Access the TextView from the layout
+        val textView = root.findViewById<TextView>(R.id.percentage)
+
+        // Change the text content of the TextView
+        textView.text = String.format(Locale.US, "%.2f%%", calculateExploredPercentage())
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun calculateExploredPercentage() : Double
+    {
+        val file = File(requireContext().filesDir, "recordsC.txt")
+        if(!file.exists())
+        {
+            return 0.0
+        }
+
+        return 100*file.readText().split("\n").count()/500000.0
     }
 }
