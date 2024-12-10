@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.animation.AnimatableView.Listener
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapListener
+import org.osmdroid.events.ScrollEvent
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
@@ -97,7 +99,7 @@ class ExploreFragment : Fragment() {
             }
 
         locationOverlay.enableFollowLocation()
-        val icon = ContextCompat.getDrawable(requireContext(), R.drawable.twotone_arrow_circle_down_24)?.toBitmap()
+        val icon = ContextCompat.getDrawable(requireContext(), R.drawable.twotone_circle_24)?.toBitmap()
 
         locationOverlay.setDirectionIcon(icon)
         locationOverlay.setPersonIcon(icon)
@@ -112,7 +114,6 @@ class ExploreFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
-
                 if (location != null) {
                     val latitude = location.latitude
                     val longitude = location.longitude
@@ -120,10 +121,6 @@ class ExploreFragment : Fragment() {
                     mapController.setCenter(GeoPoint(latitude, longitude))
                 }
 
-
-            }.addOnFailureListener {
-                mapController.setCenter(GeoPoint(0.0, 0.0))
-                mapController.setZoom(4.0)
             }
 
         listener = ChangeMaker(mapView, requireContext())
@@ -149,6 +146,8 @@ class ExploreFragment : Fragment() {
                     }
                 }
         }
+
+        buttonCenterMap.performClick()
     }
 
 

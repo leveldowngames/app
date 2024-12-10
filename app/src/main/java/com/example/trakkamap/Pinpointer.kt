@@ -38,30 +38,67 @@ class Pinpointer : Service()
 
         @SuppressLint("MissingPermission")
         override fun handleMessage(msg: Message) {
-            // Normally we would do some work here, like download a file.
-            // For our sample, we just sleep for 5 seconds.
-            val file = File(this@Pinpointer.filesDir, "records.txt")
-            if(!file.exists())
-            {
-                file.appendText("")
-            }
+            // Opens files for each zoom level
+            val fileA = File(this@Pinpointer.filesDir, "recordsA.txt")
+            val fileB = File(this@Pinpointer.filesDir, "recordsB.txt")
+            val fileC = File(this@Pinpointer.filesDir, "recordsC.txt")
+            val fileD = File(this@Pinpointer.filesDir, "recordsD.txt")
+            val fileE = File(this@Pinpointer.filesDir, "recordsE.txt")
+
+            // If they don't exist, create them
+            if(!fileA.exists())
+                fileA.appendText("")
+
+            if(!fileB.exists())
+                fileB.appendText("")
+
+            if(!fileC.exists())
+                fileC.appendText("")
+
+            if(!fileD.exists())
+                fileD.appendText("")
+
+            if(!fileE.exists())
+                fileE.appendText("")
 
             try {
+                // Pinpointer loop
                 while(true)
                 {
-                    val recordFileString = file.readText()
-                    val exploredGeotags = recordFileString.split("\n")
-
-                    Log.i("extracted from file", exploredGeotags.toString())
+                    val exploredGeotagsA = fileA.readText().split("\n")
+                    val exploredGeotagsB = fileB.readText().split("\n")
+                    val exploredGeotagsC = fileC.readText().split("\n")
+                    val exploredGeotagsD = fileD.readText().split("\n")
+                    val exploredGeotagsE = fileE.readText().split("\n")
 
                     fusedLocationClient = LocationServices.getFusedLocationProviderClient(this@Pinpointer)
                     fusedLocationClient.lastLocation
                         .addOnSuccessListener { location : Location? ->
-                            val squareID = calculatePrintableID(location!!)
-                            if(exploredGeotags.indexOf(squareID) == -1)
+                            if(location != null)
                             {
-                                file.appendText(squareID + "\n")
+                                val A_ID = ZoomTypeA_ID(location)
+                                val B_ID = ZoomTypeB_ID(location)
+                                val C_ID = ZoomTypeC_ID(location)
+                                val D_ID = ZoomTypeD_ID(location)
+                                val E_ID = ZoomTypeE_ID(location)
+
+                                if(exploredGeotagsA.indexOf(A_ID) == -1)
+                                    fileA.appendText(A_ID + "\n")
+
+                                if(exploredGeotagsB.indexOf(B_ID) == -1)
+                                    fileB.appendText(B_ID + "\n")
+
+                                if(exploredGeotagsC.indexOf(C_ID) == -1)
+                                    fileC.appendText(C_ID + "\n")
+
+                                if(exploredGeotagsD.indexOf(D_ID) == -1)
+                                    fileD.appendText(D_ID + "\n")
+
+                                if(exploredGeotagsE.indexOf(E_ID) == -1)
+                                    fileE.appendText(E_ID + "\n")
+
                                 Log.i("pinpointer", "appended geotags file")
+
                             }
                         }
 
@@ -148,16 +185,48 @@ class Pinpointer : Service()
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show()
     }
 
-    private fun calculateSquareID(loc : Location) : Pair<Int, Int> {
+    private fun ZoomTypeA_ID (loc : Location) : String {
         val latitude = loc.latitude
         val longitude = loc.longitude
 
         val coordinates : Pair<Int, Int> = Pair(floor((longitude+180)/0.009).toInt(), floor((latitude+90)/0.009).toInt())
 
-        return coordinates
+        return coordinates.toString()
     }
 
-    private fun calculatePrintableID(loc: Location) : String{
-        return calculateSquareID(loc).toString()
+    private fun ZoomTypeB_ID (loc : Location) : String {
+        val latitude = loc.latitude
+        val longitude = loc.longitude
+
+        val coordinates : Pair<Int, Int> = Pair(floor((longitude+180)/0.036).toInt(), floor((latitude+90)/0.036).toInt())
+
+        return coordinates.toString()
+    }
+
+    private fun ZoomTypeC_ID (loc : Location) : String {
+        val latitude = loc.latitude
+        val longitude = loc.longitude
+
+        val coordinates : Pair<Int, Int> = Pair(floor((longitude+180)/0.36).toInt(), floor((latitude+90)/0.36).toInt())
+
+        return coordinates.toString()
+    }
+
+    private fun ZoomTypeD_ID (loc : Location) : String {
+        val latitude = loc.latitude
+        val longitude = loc.longitude
+
+        val coordinates : Pair<Int, Int> = Pair(floor((longitude+180)/3.6).toInt(), floor((latitude+90)/3.6).toInt())
+
+        return coordinates.toString()
+    }
+
+    private fun ZoomTypeE_ID (loc : Location) : String {
+        val latitude = loc.latitude
+        val longitude = loc.longitude
+
+        val coordinates : Pair<Int, Int> = Pair(floor((longitude+180)/12.0).toInt(), floor((latitude+90)/12.0).toInt())
+
+        return coordinates.toString()
     }
 }

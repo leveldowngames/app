@@ -21,10 +21,51 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
     private var lastTime = System.currentTimeMillis()
 
     private fun getExploredIDs(context: Context, zoom: Double) : List<Pair<Int, Int>> {
-        val file = File(context.filesDir, "records.txt")
-        if(!file.exists())
+        Log.i("zoom", zoom.toString())
+        var file : File
+        if (zoom > 14)
         {
-            return emptyList()
+            file = File(context.filesDir, "recordsA.txt")
+            if(!file.exists())
+            {
+                return emptyList()
+            }
+        }
+
+        else if(zoom > 12)
+        {
+            file = File(context.filesDir, "recordsB.txt")
+            if(!file.exists())
+            {
+                return emptyList()
+            }
+        }
+
+        else if(zoom > 9)
+        {
+            file = File(context.filesDir, "recordsC.txt")
+            if(!file.exists())
+            {
+                return emptyList()
+            }
+        }
+
+        else if(zoom > 7)
+        {
+            file = File(context.filesDir, "recordsD.txt")
+            if(!file.exists())
+            {
+                return emptyList()
+            }
+        }
+
+        else
+        {
+            file = File(context.filesDir, "recordsE.txt")
+            if(!file.exists())
+            {
+                return emptyList()
+            }
         }
 
         val recordFileString = file.readText()
@@ -46,11 +87,26 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
         return exploredGeotags
     }
 
+    private fun divisionSize(zoom: Double) : Double {
+        return if (zoom > 14)
+            0.009
+        else if(zoom > 12)
+            0.036
+        else if(zoom > 9)
+            0.36
+        else if(zoom > 7)
+            3.6
+        else
+            12.0
+    }
+
     private fun getScreenIDs(context: Context, zoom: Double) : List<Pair<Int, Int>>{
-        val highLonID = ceil((mapView.projection.boundingBox.lonEast+180)/0.009).toInt()
-        val lowLonID = floor((mapView.projection.boundingBox.lonWest+180)/0.009).toInt()
-        val highLatID = ceil((mapView.projection.boundingBox.latNorth+90)/0.009).toInt()
-        val lowLatID = floor((mapView.projection.boundingBox.latSouth+90)/0.009).toInt()
+        val highLonID = ceil((mapView.projection.boundingBox.lonEast+180)/divisionSize(zoom)).toInt()+3
+        val lowLonID = floor((mapView.projection.boundingBox.lonWest+180)/divisionSize(zoom)).toInt()-3
+        val highLatID = ceil((mapView.projection.boundingBox.latNorth+90)/divisionSize(zoom)).toInt()+3
+        val lowLatID = floor((mapView.projection.boundingBox.latSouth+90)/divisionSize(zoom)).toInt()-3
+
+        // the +- 3 is to hide from the user that the overlay is only loaded when the area is exposed
 
         val listedIDs = arrayListOf<Pair<Int, Int>>()
         // (longitudeID, latitudeID) is the order
@@ -65,29 +121,27 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
         return listedIDs
     }
 
-    private fun getGeographicalCoordsFromID(id: Pair<Int, Int>) : Pair<Double, Double>
+    private fun getGeographicalCoordsFromID(id: Pair<Int, Int>, zoom: Double) : Pair<Double, Double>
     {
         // receives (lonID, latID), returns (lon, lat)
-        return Pair<Double, Double>(id.second*0.009-90,id.first*0.009-180)
+        return Pair<Double, Double>(id.second*divisionSize(zoom)-90,id.first*divisionSize(zoom)-180)
     }
 
 
-    private fun generatePolygonFromID(id: Pair<Int, Int>) : Polygon{
+    private fun generatePolygonFromID(id: Pair<Int, Int>, zoom: Double) : Polygon{
         val geoPoints = ArrayList<GeoPoint>()
-        val coords = getGeographicalCoordsFromID(id)
-
+        val coords = getGeographicalCoordsFromID(id, zoom)
 
         // add your points here
         val polygon = Polygon();
         geoPoints.add(GeoPoint(coords.first, coords.second))
-        geoPoints.add(GeoPoint(coords.first, coords.second+0.009))
-        geoPoints.add(GeoPoint(coords.first+0.009, coords.second+0.009))
-        geoPoints.add(GeoPoint(coords.first+0.009, coords.second))
+        geoPoints.add(GeoPoint(coords.first, coords.second+divisionSize(zoom)))
+        geoPoints.add(GeoPoint(coords.first+divisionSize(zoom), coords.second+divisionSize(zoom)))
+        geoPoints.add(GeoPoint(coords.first+divisionSize(zoom), coords.second))
         geoPoints.add(geoPoints[0]);    //forces the loop to close(connect last point to first point)
 
         polygon.fillPaint.color = Color.parseColor("#1Ebb42fc") //set fill color
         polygon.setPoints(geoPoints);
-        polygon.title = "A sample polygon"
         polygon.outlinePaint.color = Color.parseColor("#0Fbb42fc")
         polygon.outlinePaint.strokeWidth = 10.0f
 
@@ -106,8 +160,6 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
     }
 
     fun drawGrid(context: Context){
-        Log.i("drawGrid", mapView.boundingBox.toString())
-
         killPrevious()
         val zoom = mapView.zoomLevelDouble
         val exploredGeotags = getExploredIDs(context, zoom)
@@ -118,7 +170,7 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
         {
             if (exploredGeotags.indexOf(screenTag) == -1)
             {
-                val polygon = (generatePolygonFromID(screenTag))
+                val polygon = (generatePolygonFromID(screenTag, zoom))
                 mapView.overlays.add(polygon)
             }
         }
@@ -137,6 +189,12 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
     }
 
     override fun onZoom(event: ZoomEvent?): Boolean {
+        val curTime = System.currentTimeMillis()
+        if((curTime - lastTime) > 1000)
+        {
+            lastTime = curTime
+            drawGrid(context)
+        }
         return false
     }
 }
