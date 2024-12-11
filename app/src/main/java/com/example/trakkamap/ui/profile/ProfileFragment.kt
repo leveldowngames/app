@@ -47,6 +47,7 @@ class ProfileFragment : Fragment() {
                     R.anim.fade_out
                 )
                 .replace(R.id.innerFragmentContainer, HelpFragment())
+                .addToBackStack(null)
                 .commit()
         }
 
@@ -58,6 +59,7 @@ class ProfileFragment : Fragment() {
                     R.anim.fade_out
                 )
                 .replace(R.id.innerFragmentContainer, SettingsFragment())
+                .addToBackStack(null)
                 .commit()
         }
 
@@ -69,6 +71,7 @@ class ProfileFragment : Fragment() {
                     R.anim.fade_out
                 )
                 .replace(R.id.innerFragmentContainer, PrivacyFragment())
+                .addToBackStack(null)
                 .commit()
         }
     }

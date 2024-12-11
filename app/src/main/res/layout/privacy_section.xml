@@ -1,70 +1,77 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#1c1b1f"
-    android:orientation="vertical">
+    android:fillViewport="true"
+    android:scrollbarThumbVertical="@color/dark_purple">
 
-    <!-- Content of the new fragment -->
-
-    <ImageButton
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_arrow_back_24"
-        android:background="#00000000"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="15dp"
-        />
-
-    <ImageView
-        android:id="@+id/centralIcon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="32dp"
-        android:paddingBottom="42dp"
-        android:src="@drawable/baseline_purple_assignment_64"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/privacy"
-        android:textColor="#904adc"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/centralIcon"
-        app:layout_constraintEnd_toEndOf="@id/centralIcon"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/centralIcon" />
-
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:gravity="start"
-        app:layout_constraintTop_toBottomOf="@id/centralIcon"
-        android:text="@string/privacy_text"
-        android:textColor="@color/light_purple"
-        android:textSize="13sp"
-        android:textStyle="normal" />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="#1c1b1f"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="110dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/copyright_text"
-        android:textColor="@color/light_purple"
-        android:textSize="11sp"
-        android:textStyle="normal" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Content of the new fragment -->
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:background="#00000000"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="15dp"
+            />
+
+        <ImageView
+            android:id="@+id/centralIcon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="32dp"
+            android:paddingBottom="42dp"
+            android:src="@drawable/baseline_purple_assignment_64"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy"
+            android:textColor="#904adc"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/centralIcon"
+            app:layout_constraintEnd_toEndOf="@id/centralIcon"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/centralIcon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/centralIcon"
+            android:text="@string/privacy_text"
+            android:textColor="@color/light_purple"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="110dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/copyright_text"
+            android:textColor="@color/light_purple"
+            android:textSize="11sp"
+            android:textStyle="normal" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
