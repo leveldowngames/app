@@ -51,11 +51,20 @@
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
         android:gravity="start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintTop_toBottomOf="@id/centralIcon"
         android:text="@string/privacy_text"
         android:textColor="@color/light_purple"
-        android:textSize="14sp"
+        android:textSize="13sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="110dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/copyright_text"
+        android:textColor="@color/light_purple"
+        android:textSize="11sp"
         android:textStyle="normal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

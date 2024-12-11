@@ -70,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         startService(Intent(this, Pinpointer::class.java))
-
     }
 
     // Check if location permissions are granted

@@ -8,9 +8,11 @@
     <string name="button3_text">Privacy</string>
     <string name="hi_user">Hi, User</string>
     <string name="help">Help</string>
-    <string name="help_infotext">This is a sample text for the help menu. Someone needs to actually write me later...</string>
     <string name="settings">Settings</string>
-    <string name="settings_text">This is a sample text for the settings menu. This won\'t stay here. It\'ll become, you know... the settings. Which there are many of. I guess.</string>
     <string name="privacy">Privacy</string>
-    <string name="privacy_text">I don\'t believe in privacy.</string>
+    <string name="delete">Delete</string>
+    <string name="warning_text">This action cannot be undone</string>
+    <string name="delete_label_text">Erase all location records</string>
+    <string name="privacy_text">Trakka Map values your privacy. Here is some important information regarding your data on Trakka Map.\n\nTrakka Map [\"the app\"] and its developers (Level Down Games) [\"the developers\"] do not collect location data to external servers. All location information is stored on-device, locally. Our third-party map providers, OpenStreetMap and OSMDroid [\"the map providers\"] may collect additional usage information. The developers do not interact with such actions nor have any influence over them. The map providers are subject to their own terms and conditions. The developers do not provide warranty for the app\'s usage.</string>
+    <string name="copyright_text">© Level Down Games - Brasil, 2024</string>
 </resources>

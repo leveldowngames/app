@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button_color">#FFa85bff</color>
     <color name="light_purple">#ead8ff</color>
+    <color name="dark_purple">#371C54</color>
 </resources>

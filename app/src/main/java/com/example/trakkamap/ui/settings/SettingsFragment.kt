@@ -1,13 +1,18 @@
 package com.example.trakkamap.ui.settings
 
+import android.media.Image
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.trakkamap.R
 import com.example.trakkamap.databinding.SettingsSectionBinding
+import com.example.trakkamap.ui.help.HelpFragment
 
 class SettingsFragment : Fragment() {
 
@@ -41,6 +46,11 @@ class SettingsFragment : Fragment() {
                 )
                 .remove(this)
                 .commit()
+        }
+
+        val deleteButton = requireView().findViewById<Button>(R.id.delete_button)
+        deleteButton.setOnClickListener {
+            ConfirmationDialog().show(childFragmentManager, "DeleteDialog")
         }
     }
 

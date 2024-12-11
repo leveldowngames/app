@@ -1,62 +1,245 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#1c1b1f"
-    android:orientation="vertical">
-
-    <!-- Content of the new fragment -->
-
-    <ImageButton
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_arrow_back_24"
-        android:background="#00000000"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="15dp"
-        />
-
-
-    <ImageView
-        android:id="@+id/centralIcon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="32dp"
-        android:paddingBottom="42dp"
-        android:src="@drawable/baseline_purple_info_64"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/help"
-        android:textColor="#904adc"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/centralIcon"
-        app:layout_constraintEnd_toEndOf="@id/centralIcon"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/centralIcon" />
-
-    <TextView
+    android:fillViewport="true"
+    android:scrollbarThumbVertical="@color/dark_purple">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:gravity="start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        android:text="@string/help_infotext"
-        android:textColor="@color/light_purple"
-        android:textSize="14sp"
-        android:textStyle="normal" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="#1c1b1f"
+        android:orientation="vertical"
+        android:paddingBottom="125dp">
+
+        <!-- Content of the new fragment -->
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:background="#00000000"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="15dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/centralIcon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="32dp"
+            android:paddingBottom="42dp"
+            android:src="@drawable/baseline_purple_info_64"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/help"
+            android:textColor="#904adc"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/centralIcon"
+            app:layout_constraintEnd_toEndOf="@id/centralIcon"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/centralIcon" />
+
+        <TextView
+            android:id="@+id/first_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/centralIcon"
+            android:text="Welcome to Trakka Map!"
+            android:textColor="@color/light_purple"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/second_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/first_text"
+            android:text="This section will help you get started."
+            android:textColor="@color/light_purple"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/third_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/second_text"
+            android:text="What is Trakka Map?"
+            android:textColor="@color/purple_200"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fourth_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/third_text"
+            android:text="Trakka Map is a location tracking app that allows you to see which areas of the world you have explored. It is inspired on video games, that often feature 'fog of war' maps."
+            android:textColor="@color/light_purple"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/fifth_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/fourth_text"
+            android:text="What do the rectangles on my map mean?"
+            android:textColor="@color/purple_200"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sixth_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/fifth_text"
+            android:text="The purple tiles mean areas you still haven't explored. Areas with no tiles on top represent the places you've been nearby."
+            android:textColor="@color/light_purple"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/seventh_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/sixth_text"
+            android:text="What does the percentage on the Achievements tab mean?"
+            android:textColor="@color/purple_200"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/eighth_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/seventh_text"
+            android:text="The percentage represents how many tiles of sides 0.36° you have passed through. There is a total of 500 thousand of them."
+            android:textColor="@color/light_purple"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/nineth_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/eighth_text"
+            android:text="Who made Trakka Map?"
+            android:textColor="@color/purple_200"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tenth_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/nineth_text"
+            android:text="Level Down Games — a fictional game studio created by Gabriel Stiegemeier, Guilherme Brizzi and Mathias Recktenvald for the Software Engineering class at UFSM."
+            android:textColor="@color/light_purple"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/eleventh_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/tenth_text"
+            android:text="Why are things in English?"
+            android:textColor="@color/purple_200"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/twelfth_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/eleventh_text"
+            android:text="Sinceramente, não sei. Started like this. Kept it like this."
+            android:textColor="@color/light_purple"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            app:layout_constraintTop_toBottomOf="@id/twelfth_text"
+            android:text="Made in 🇧🇷 by Level Down Games"
+            android:textColor="@color/light_purple"
+            android:textSize="11sp"
+            android:textStyle="normal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
