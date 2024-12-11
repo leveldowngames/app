@@ -23,8 +23,10 @@
         />
 
     <TextView
+        android:id="@+id/name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingEnd="30dp"
         app:layout_constraintBottom_toBottomOf="@id/centralIcon"
         app:layout_constraintEnd_toEndOf="@id/centralIcon"
         app:layout_constraintStart_toStartOf="@id/centralIcon"
@@ -32,6 +34,21 @@
         android:textColor="@color/light_purple"
         android:textSize="35sp"
         android:textStyle="bold"/>
+
+    <ImageButton
+        android:id="@+id/edit_name_button"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="-40dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="-7.5dp"
+        android:padding="15dp"
+        android:background="#00ffffff"
+        android:src="@drawable/baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="@id/centralIcon"
+        app:layout_constraintStart_toEndOf="@id/name_text"
+        />
 
 
     <ImageButton

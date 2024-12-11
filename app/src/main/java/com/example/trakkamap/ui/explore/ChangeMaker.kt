@@ -142,8 +142,8 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
 
         polygon.fillPaint.color = Color.parseColor("#1Ebb42fc") //set fill color
         polygon.setPoints(geoPoints);
-        polygon.outlinePaint.color = Color.parseColor("#0Fbb42fc")
-        polygon.outlinePaint.strokeWidth = 10.0f
+        polygon.outlinePaint.color = Color.parseColor("#1Fbb42fc")
+        polygon.outlinePaint.strokeWidth = 8.0f
 
         return polygon
     }
