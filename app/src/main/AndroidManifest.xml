@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"  />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"  />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -33,9 +37,12 @@
             android:value="osmdroid" />
 
         <service
-            android:name="Pinpointer"
+            android:name="com.example.trakkamap.Pinpointer"
             android:foregroundServiceType="location"
-            android:persistent="true"/>
+            android:persistent="true"
+            android:enabled="true"
+            android:exported="false"
+            tools:ignore="ForegroundServicePermission" />
 
     </application>
 </manifest>

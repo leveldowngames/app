@@ -8,8 +8,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -27,22 +30,48 @@ class MainActivity : AppCompatActivity() {
             val fineLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
             val coarseLocationGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
 
-            if (!(fineLocationGranted || coarseLocationGranted)) {
+            if (!(fineLocationGranted && coarseLocationGranted)) {
                 Toast.makeText(this, "Location permissions are needed for the app to work properly.", Toast.LENGTH_SHORT).show()
             }
 
             if (!hasNotificationPermission()) {
                 requestNotificationPermission()
             }
+
+            if (!hasBackgroundLocationPermission())
+            {
+                showPermissionRationale()
+            }
         }
+
 
     private val requestNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { permission ->
             if (!permission) {
-                Toast.makeText(this, "Notification permissions are recommended the app to work properly.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Notification permissions are recommended for the app to work properly.", Toast.LENGTH_SHORT).show()
             }
         }
 
+    private val requestBackgroundLocationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { permission ->
+            if (!permission) {
+                Toast.makeText(this, "Tracking may be inaccurate without background location access.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+    private fun showPermissionRationale() {
+        AlertDialog.Builder(this)
+            .setTitle("Background Location Permission Required")
+            .setMessage("Trakka Map requires background location access to accurately track your exploration even when the app is not in use.\n\nOn the following menu, tap 'Allow all the time'.")
+            .setPositiveButton("OK") { _, _ ->
+                requestBackgroundLocationPermission()
+            }
+            .create()
+            .show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -69,7 +98,8 @@ class MainActivity : AppCompatActivity() {
             requestLocationPermission()
         }
 
-        startService(Intent(this, Pinpointer::class.java))
+        if (!Pinpointer.isRunning)
+            startForegroundService(Intent(this, Pinpointer::class.java))
     }
 
     // Check if location permissions are granted
@@ -84,7 +114,7 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.ACCESS_COARSE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
 
-        return fineLocationGranted || coarseLocationGranted
+        return fineLocationGranted && coarseLocationGranted
     }
 
     // Request location permissions
@@ -111,11 +141,28 @@ class MainActivity : AppCompatActivity() {
         return notificationGranted
     }
 
-    // Request location permissions
+    private fun hasBackgroundLocationPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
+        else
+            true
+    }
+
+
+    // Request notification permissions
     private fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requestNotificationPermissionLauncher.launch(
                 Manifest.permission.POST_NOTIFICATIONS
+            )
+        }
+    }
+
+    // Request location permissions
+    private fun requestBackgroundLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            requestBackgroundLocationPermissionLauncher.launch(
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
             )
         }
     }
