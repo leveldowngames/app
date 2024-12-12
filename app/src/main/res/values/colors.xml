@@ -10,4 +10,16 @@
     <color name="button_color">#FFa85bff</color>
     <color name="light_purple">#ead8ff</color>
     <color name="dark_purple">#371C54</color>
+    <color name="gray">#ADADAD</color>
+    <color name="dark_gray">#131217</color>
+    <color name="achievement1_color">#03A9F4</color>
+    <color name="achievement2_color">#4CAF50</color>
+    <color name="achievement3_color">#FF7A22</color>
+    <color name="achievement4_color">#F44336</color>
+    <color name="achievement5_color">#009688</color>
+    <color name="achievement6_color">#a85bff</color>
+    <color name="achievement7_color">#E138D8</color>
+    <color name="achievement8_color">#3F51B5</color>
+    <color name="achievement9_color">#FFD500</color>
+
 </resources>

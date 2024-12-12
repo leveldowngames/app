@@ -97,8 +97,6 @@ class Pinpointer : Service()
                                 if(exploredGeotagsE.indexOf(E_ID) == -1)
                                     fileE.appendText(E_ID + "\n")
 
-                                Log.i("pinpointer", "appended geotags file")
-
                             }
                         }
 

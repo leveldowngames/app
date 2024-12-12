@@ -66,7 +66,8 @@
         app:strokeWidth="1dp"
         app:layout_constraintTop_toBottomOf="@id/cardTop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,7 +75,130 @@
             android:padding="16dp"
             android:textSize="14sp"
             android:text="Here, you'll see your achievements."
+            android:layout_gravity="top|center"
             android:textAppearance="?android:textAppearanceMedium" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="3"
+            android:paddingTop="50dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="15dp"
+            android:stretchMode="spacingWidthUniform"
+            >
+
+            <ImageButton
+                android:id="@+id/achievement1"
+                android:src="@drawable/baseline_outlined_flag_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                />
+
+            <ImageButton
+                android:id="@+id/achievement2"
+                android:src="@drawable/baseline_hiking_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_margin="5dp"
+
+
+                />
+
+            <ImageButton
+                android:id="@+id/achievement3"
+                android:src="@drawable/baseline_pedal_bike_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+
+
+                />
+
+            <ImageButton
+                android:id="@+id/achievement4"
+                android:src="@drawable/baseline_directions_car_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+
+                />
+
+            <ImageButton
+                android:id="@+id/achievement5"
+                android:src="@drawable/baseline_train_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+
+                />
+
+            <ImageButton
+                android:id="@+id/achievement6"
+                android:src="@drawable/baseline_connecting_airports_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+
+                />
+
+            <ImageButton
+                android:id="@+id/achievement7"
+                android:src="@drawable/baseline_explore_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+
+                />
+
+            <ImageButton
+                android:id="@+id/achievement8"
+                android:src="@drawable/baseline_directions_boat_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+
+                />
+
+            <ImageButton
+                android:id="@+id/achievement9"
+                android:src="@drawable/baseline_language_white_48"
+                android:background="@drawable/round_corner_locked"
+                android:layout_columnWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+
+                />
+
+        </GridLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

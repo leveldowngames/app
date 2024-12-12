@@ -54,4 +54,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.osmdroid.osmdroid.android)
     implementation(libs.androidx.cardview)
+    implementation(libs.androidx.gridlayout)
 }
