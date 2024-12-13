@@ -1,6 +1,7 @@
 package com.example.trakkamap
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -48,15 +49,18 @@ class MainActivity : AppCompatActivity() {
     private val requestNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { permission ->
             if (!permission) {
-                Toast.makeText(this, "Notification permissions are recommended for the app to work properly.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Notification are recommended for the app to work properly.", Toast.LENGTH_SHORT).show()
             }
         }
 
+    @SuppressLint("NewApi")
     private val requestBackgroundLocationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { permission ->
             if (!permission) {
                 Toast.makeText(this, "Tracking may be inaccurate without background location access.", Toast.LENGTH_SHORT).show()
             }
+            else if (!Pinpointer.isRunning)
+                startForegroundService(Intent(this, Pinpointer::class.java))
         }
 
 
@@ -98,8 +102,12 @@ class MainActivity : AppCompatActivity() {
             requestLocationPermission()
         }
 
-        if (!Pinpointer.isRunning)
-            startForegroundService(Intent(this, Pinpointer::class.java))
+        if(hasLocationPermission())
+        {
+            if (!Pinpointer.isRunning)
+                startForegroundService(Intent(this, Pinpointer::class.java))
+        }
+
     }
 
     // Check if location permissions are granted
