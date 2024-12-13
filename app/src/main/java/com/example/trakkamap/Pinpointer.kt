@@ -71,35 +71,6 @@ class Pinpointer : Service() {
         // big bulky function
         // im sorry future me
 
-        // Opens files for each zoom level
-        val fileA = File(this@Pinpointer.filesDir, "recordsA.txt")
-        val fileB = File(this@Pinpointer.filesDir, "recordsB.txt")
-        val fileC = File(this@Pinpointer.filesDir, "recordsC.txt")
-        val fileD = File(this@Pinpointer.filesDir, "recordsD.txt")
-        val fileE = File(this@Pinpointer.filesDir, "recordsE.txt")
-
-        // If they don't exist, create them
-        if(!fileA.exists())
-            fileA.appendText("")
-
-        if(!fileB.exists())
-            fileB.appendText("")
-
-        if(!fileC.exists())
-            fileC.appendText("")
-
-        if(!fileD.exists())
-            fileD.appendText("")
-
-        if(!fileE.exists())
-            fileE.appendText("")
-
-        val exploredGeotagsA = fileA.readText().split("\n")
-        val exploredGeotagsB = fileB.readText().split("\n")
-        val exploredGeotagsC = fileC.readText().split("\n")
-        val exploredGeotagsD = fileD.readText().split("\n")
-        val exploredGeotagsE = fileE.readText().split("\n")
-
         // i'm using a lot of deprecated things because the new things
         // only run in very new apis
         // fuck you google
@@ -121,6 +92,36 @@ class Pinpointer : Service() {
                 locationRequest,
                 object : LocationCallback() {
                     override fun onLocationResult(locationResult: LocationResult) {
+                        // Opens files for each zoom level
+                        val fileA = File(this@Pinpointer.filesDir, "recordsA.txt")
+                        val fileB = File(this@Pinpointer.filesDir, "recordsB.txt")
+                        val fileC = File(this@Pinpointer.filesDir, "recordsC.txt")
+                        val fileD = File(this@Pinpointer.filesDir, "recordsD.txt")
+                        val fileE = File(this@Pinpointer.filesDir, "recordsE.txt")
+
+                        // If they don't exist, create them
+                        if(!fileA.exists())
+                            fileA.appendText("")
+
+                        if(!fileB.exists())
+                            fileB.appendText("")
+
+                        if(!fileC.exists())
+                            fileC.appendText("")
+
+                        if(!fileD.exists())
+                            fileD.appendText("")
+
+                        if(!fileE.exists())
+                            fileE.appendText("")
+
+                        val exploredGeotagsA = fileA.readText().split("\n")
+                        val exploredGeotagsB = fileB.readText().split("\n")
+                        val exploredGeotagsC = fileC.readText().split("\n")
+                        val exploredGeotagsD = fileD.readText().split("\n")
+                        val exploredGeotagsE = fileE.readText().split("\n")
+
+
                         val location = locationResult.lastLocation
                         Log.i("Pinpointer", location.toString())
                         if (location != null) {

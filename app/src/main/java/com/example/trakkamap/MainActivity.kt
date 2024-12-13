@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    @SuppressLint("NewApi")
     private val requestBackgroundLocationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { permission ->
             if (!permission) {
@@ -73,7 +72,6 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -1,6 +1,7 @@
 package com.example.trakkamap.ui.achievements
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -130,7 +131,16 @@ class AchievementsFragment : Fragment() {
             return 0.0
         }
 
-        return 100*file.readText().split("\n").count()/500000.0
+        var count = 0
+        for (line in file.readText().split("\n"))
+        {
+            if(line != "")
+            {
+                count++
+            }
+        }
+
+        return 100*count/500000.0
     }
 
 
