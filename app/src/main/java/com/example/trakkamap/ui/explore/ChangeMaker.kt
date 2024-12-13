@@ -22,7 +22,7 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
 
     private fun getExploredIDs(context: Context, zoom: Double) : List<Pair<Int, Int>> {
         Log.i("zoom", zoom.toString())
-        var file : File
+        val file : File
         if (zoom > 14)
         {
             file = File(context.filesDir, "recordsA.txt")
@@ -76,7 +76,7 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
         {
             try {
                 val tuple = tag.replace(")", "").replace("(", "").replace(" ", "").split(",")
-                exploredGeotags.add(Pair<Int, Int>(tuple[0].toInt(), tuple[1].toInt()))
+                exploredGeotags.add(Pair(tuple[0].toInt(), tuple[1].toInt()))
             }
             catch (e: NumberFormatException)
             {
@@ -100,7 +100,7 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
             12.0
     }
 
-    private fun getScreenIDs(context: Context, zoom: Double) : List<Pair<Int, Int>>{
+    private fun getScreenIDs(zoom: Double) : List<Pair<Int, Int>>{
         val highLonID = ceil((mapView.projection.boundingBox.lonEast+180)/divisionSize(zoom)).toInt()+3
         val lowLonID = floor((mapView.projection.boundingBox.lonWest+180)/divisionSize(zoom)).toInt()-3
         val highLatID = ceil((mapView.projection.boundingBox.latNorth+90)/divisionSize(zoom)).toInt()+3
@@ -114,7 +114,7 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
         {
             for (j in lowLatID until highLatID)
             {
-                listedIDs.add(Pair<Int, Int>(i, j))
+                listedIDs.add(Pair(i, j))
             }
         }
 
@@ -124,7 +124,7 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
     private fun getGeographicalCoordsFromID(id: Pair<Int, Int>, zoom: Double) : Pair<Double, Double>
     {
         // receives (lonID, latID), returns (lon, lat)
-        return Pair<Double, Double>(id.second*divisionSize(zoom)-90,id.first*divisionSize(zoom)-180)
+        return Pair(id.second*divisionSize(zoom)-90,id.first*divisionSize(zoom)-180)
     }
 
 
@@ -133,15 +133,15 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
         val coords = getGeographicalCoordsFromID(id, zoom)
 
         // add your points here
-        val polygon = Polygon();
+        val polygon = Polygon()
         geoPoints.add(GeoPoint(coords.first, coords.second))
         geoPoints.add(GeoPoint(coords.first, coords.second+divisionSize(zoom)))
         geoPoints.add(GeoPoint(coords.first+divisionSize(zoom), coords.second+divisionSize(zoom)))
         geoPoints.add(GeoPoint(coords.first+divisionSize(zoom), coords.second))
-        geoPoints.add(geoPoints[0]);    //forces the loop to close(connect last point to first point)
+        geoPoints.add(geoPoints[0])    //forces the loop to close(connect last point to first point)
 
         polygon.fillPaint.color = Color.parseColor("#1Ebb42fc") //set fill color
-        polygon.setPoints(geoPoints);
+        polygon.setPoints(geoPoints)
         polygon.outlinePaint.color = Color.parseColor("#1Fbb42fc")
         polygon.outlinePaint.strokeWidth = 8.0f
 
@@ -159,11 +159,11 @@ class ChangeMaker(private var mapView : MapView, private var context: Context) :
         }
     }
 
-    fun drawGrid(context: Context){
+    private fun drawGrid(context: Context){
         killPrevious()
         val zoom = mapView.zoomLevelDouble
         val exploredGeotags = getExploredIDs(context, zoom)
-        val screenGeotags = getScreenIDs(context, zoom)
+        val screenGeotags = getScreenIDs(zoom)
 
 
         for (screenTag in screenGeotags)

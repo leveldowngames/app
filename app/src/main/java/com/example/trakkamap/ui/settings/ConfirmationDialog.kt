@@ -12,7 +12,7 @@ class ConfirmationDialog : DialogFragment() {
             // Use the Builder class for convenient dialog construction.
             val builder = AlertDialog.Builder(it)
             builder.setMessage("This action will delete your entire location history. It cannot be undone. Are you sure?")
-                .setPositiveButton("Delete") { dialog, id ->
+                .setPositiveButton("Delete") { _, _ ->
                     val fileA = File(requireContext().filesDir, "recordsA.txt")
                     val fileB = File(requireContext().filesDir, "recordsB.txt")
                     val fileC = File(requireContext().filesDir, "recordsC.txt")
@@ -25,7 +25,7 @@ class ConfirmationDialog : DialogFragment() {
                     fileD.writeText("")
                     fileE.writeText("")
                 }
-                .setNegativeButton("Cancel") { dialog, id ->
+                .setNegativeButton("Cancel") { _, _ ->
 
                 }
             // Create the AlertDialog object and return it.

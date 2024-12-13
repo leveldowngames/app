@@ -2,7 +2,6 @@ package com.example.trakkamap.ui.achievements
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,11 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.trakkamap.R
-import java.io.File
 
-class AchievementDialog(private val previousView : View, private val id: Int, private val hasObtained : ArrayList<Boolean>) : DialogFragment() {
+class AchievementDialog(private val id: Int, private val hasObtained : ArrayList<Boolean>) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val inflater = requireActivity().layoutInflater;
+        val inflater = requireActivity().layoutInflater
         val dialogView = inflater.inflate(R.layout.achievement_dialog, null) // Inflate the dialog layout
 
         val builder = AlertDialog.Builder(requireContext())
@@ -212,15 +210,5 @@ class AchievementDialog(private val previousView : View, private val id: Int, pr
                 view.findViewById<TextView>(R.id.achievement_status).text = "Achievement locked"
             }
         }
-    }
-
-    private fun hasObtainedAchievement(id: Int) : Boolean
-    {
-        return true
-    }
-
-    private fun setGreeting(name : String) {
-        val nameFile = File(requireContext().filesDir,"name.txt")
-        nameFile.writeText(name)
     }
 }

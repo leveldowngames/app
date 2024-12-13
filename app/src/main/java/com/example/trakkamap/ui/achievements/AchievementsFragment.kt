@@ -1,7 +1,6 @@
 package com.example.trakkamap.ui.achievements
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,47 +73,47 @@ class AchievementsFragment : Fragment() {
 
         val button1 = requireView().findViewById<ImageButton>(R.id.achievement1)
         button1.setOnClickListener {
-            AchievementDialog(requireView(), 1, hasObtained).show(childFragmentManager, "Achievement1Dialog")
+            AchievementDialog( 1, hasObtained).show(childFragmentManager, "Achievement1Dialog")
         }
 
         val button2 = requireView().findViewById<ImageButton>(R.id.achievement2)
         button2.setOnClickListener {
-            AchievementDialog(requireView(), 2, hasObtained).show(childFragmentManager, "Achievement2Dialog")
+            AchievementDialog(2, hasObtained).show(childFragmentManager, "Achievement2Dialog")
         }
 
         val button3 = requireView().findViewById<ImageButton>(R.id.achievement3)
         button3.setOnClickListener {
-            AchievementDialog(requireView(), 3, hasObtained).show(childFragmentManager, "Achievement3Dialog")
+            AchievementDialog(3, hasObtained).show(childFragmentManager, "Achievement3Dialog")
         }
 
         val button4 = requireView().findViewById<ImageButton>(R.id.achievement4)
         button4.setOnClickListener {
-            AchievementDialog(requireView(), 4, hasObtained).show(childFragmentManager, "Achievement4Dialog")
+            AchievementDialog(4, hasObtained).show(childFragmentManager, "Achievement4Dialog")
         }
 
         val button5 = requireView().findViewById<ImageButton>(R.id.achievement5)
         button5.setOnClickListener {
-            AchievementDialog(requireView(), 5, hasObtained).show(childFragmentManager, "Achievement5Dialog")
+            AchievementDialog(5, hasObtained).show(childFragmentManager, "Achievement5Dialog")
         }
 
         val button6 = requireView().findViewById<ImageButton>(R.id.achievement6)
         button6.setOnClickListener {
-            AchievementDialog(requireView(), 6, hasObtained).show(childFragmentManager, "Achievement6Dialog")
+            AchievementDialog(6, hasObtained).show(childFragmentManager, "Achievement6Dialog")
         }
 
         val button7 = requireView().findViewById<ImageButton>(R.id.achievement7)
         button7.setOnClickListener {
-            AchievementDialog(requireView(), 7, hasObtained).show(childFragmentManager, "Achievement7Dialog")
+            AchievementDialog(7, hasObtained).show(childFragmentManager, "Achievement7Dialog")
         }
 
         val button8 = requireView().findViewById<ImageButton>(R.id.achievement8)
         button8.setOnClickListener {
-            AchievementDialog(requireView(), 8, hasObtained).show(childFragmentManager, "Achievement8Dialog")
+            AchievementDialog(8, hasObtained).show(childFragmentManager, "Achievement8Dialog")
         }
 
         val button9 = requireView().findViewById<ImageButton>(R.id.achievement9)
         button9.setOnClickListener {
-            AchievementDialog(requireView(), 9, hasObtained).show(childFragmentManager, "Achievement9Dialog")
+            AchievementDialog(9, hasObtained).show(childFragmentManager, "Achievement9Dialog")
         }
     }
 

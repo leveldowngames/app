@@ -2,34 +2,24 @@ package com.example.trakkamap.ui.explore
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.location.Location
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import com.example.trakkamap.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.animation.AnimatableView.Listener
 import org.osmdroid.config.Configuration
-import org.osmdroid.events.MapListener
-import org.osmdroid.events.ScrollEvent
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.Polygon
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
@@ -134,7 +124,7 @@ class ExploreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         buttonCenterMap = requireView().findViewById(R.id.ic_center_map)
         buttonCenterMap.setOnClickListener {
-            var myPosition : Location? = null
+            var myPosition : Location?
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
